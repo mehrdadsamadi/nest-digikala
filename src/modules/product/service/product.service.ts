@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProductEntity } from './entities/product.entity';
+import { ProductEntity } from '../entities/product.entity';
 import { DeepPartial, Repository } from 'typeorm';
-import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
-import { ProductType } from './enum/type.enum';
-import { toBoolean } from '../../common/utils/functions.utils';
+import { CreateProductDto, UpdateProductDto } from '../dto/product.dto';
+import { ProductType } from '../enum/type.enum';
+import { toBoolean } from '../../../common/utils/functions.utils';
 
 @Injectable()
 export class ProductService {
@@ -102,6 +102,12 @@ export class ProductService {
         details: true,
         colors: true,
         sizes: true,
+      },
+      select: {
+        details: {
+          key: true,
+          value: true,
+        },
       },
       order: {
         createdAt: 'DESC',

@@ -10,26 +10,35 @@ import {
 } from '@nestjs/common';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { AddDetailDto, UpdateDetailDto } from '../dto/detail.dto';
+import { ProductDetailService } from '../service/product-detial.service';
 
 @Controller('product-detail')
 @ApiTags('Product-detail')
 export class ProductDetailController {
-  constructor() {}
+  constructor(private productDetailService: ProductDetailService) {}
 
   @Post()
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
-  create(@Body() detailDto: AddDetailDto) {}
+  create(@Body() detailDto: AddDetailDto) {
+    return this.productDetailService.create(detailDto);
+  }
 
-  @Get()
-  find() {}
+  @Get('/product/:productId')
+  find(@Param('productId', ParseIntPipe) productId: number) {
+    return this.productDetailService.find(productId);
+  }
 
   @Put('/:id')
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() detailDto: UpdateDetailDto,
-  ) {}
+  ) {
+    return this.productDetailService.update(id, detailDto);
+  }
 
   @Delete('/:id')
-  delete(@Param('id', ParseIntPipe) id: number) {}
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.productDetailService.delete(id);
+  }
 }
