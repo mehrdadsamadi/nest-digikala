@@ -10,26 +10,35 @@ import {
 } from '@nestjs/common';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { AddColorDto, UpdateColorDto } from '../dto/color.dto';
+import { ProductColorService } from '../service/product-color.service';
 
 @Controller('product-color')
 @ApiTags('Product-color')
 export class ProductColorController {
-  constructor() {}
+  constructor(private productColorService: ProductColorService) {}
 
   @Post()
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
-  create(@Body() colorDto: AddColorDto) {}
+  create(@Body() colorDto: AddColorDto) {
+    return this.productColorService.create(colorDto);
+  }
 
-  @Get()
-  find() {}
+  @Get('/product/:productId')
+  find(@Param('productId', ParseIntPipe) productId: number) {
+    return this.productColorService.find(productId);
+  }
 
   @Put('/:id')
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() colorDto: UpdateColorDto,
-  ) {}
+  ) {
+    return this.productColorService.update(id, colorDto);
+  }
 
   @Delete('/:id')
-  delete(@Param('id', ParseIntPipe) id: number) {}
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.productColorService.delete(id);
+  }
 }

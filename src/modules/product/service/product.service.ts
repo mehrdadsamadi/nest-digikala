@@ -115,6 +115,14 @@ export class ProductService {
           discount: true,
           active_discount: true,
         },
+        colors: {
+          color_name: true,
+          color_code: true,
+          count: true,
+          price: true,
+          discount: true,
+          active_discount: true,
+        },
       },
       order: {
         createdAt: 'DESC',
