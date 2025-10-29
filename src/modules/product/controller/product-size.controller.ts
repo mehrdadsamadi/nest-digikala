@@ -10,26 +10,35 @@ import {
 } from '@nestjs/common';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { AddSizeDto, UpdateSizeDto } from '../dto/size.dto';
+import { ProductSizeService } from '../service/product-size.service';
 
 @Controller('product-size')
 @ApiTags('Product-size')
 export class ProductSizeController {
-  constructor() {}
+  constructor(private productSizeService: ProductSizeService) {}
 
   @Post()
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
-  create(@Body() sizeDto: AddSizeDto) {}
+  create(@Body() sizeDto: AddSizeDto) {
+    return this.productSizeService.create(sizeDto);
+  }
 
-  @Get()
-  find() {}
+  @Get('/product/:productId')
+  find(@Param('productId', ParseIntPipe) productId: number) {
+    return this.productSizeService.find(productId);
+  }
 
   @Put('/:id')
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() sizeDto: UpdateSizeDto,
-  ) {}
+  ) {
+    return this.productSizeService.update(id, sizeDto);
+  }
 
   @Delete('/:id')
-  delete(@Param('id', ParseIntPipe) id: number) {}
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.productSizeService.delete(id);
+  }
 }

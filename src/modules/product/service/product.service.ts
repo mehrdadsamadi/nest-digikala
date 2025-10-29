@@ -108,6 +108,13 @@ export class ProductService {
           key: true,
           value: true,
         },
+        sizes: {
+          size: true,
+          count: true,
+          price: true,
+          discount: true,
+          active_discount: true,
+        },
       },
       order: {
         createdAt: 'DESC',
