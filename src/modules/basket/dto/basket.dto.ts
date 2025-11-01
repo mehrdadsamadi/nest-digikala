@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-export class AddToBasketDto {
+export class BasketDto {
   @ApiProperty()
   productId: number;
 

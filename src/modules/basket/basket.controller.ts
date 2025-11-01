@@ -1,6 +1,15 @@
-import { Controller, Get, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { BasketService } from './basket.service';
+import { BasketDto } from './dto/basket.dto';
 
 @Controller('basket')
 @ApiTags('Basket')
@@ -11,14 +20,25 @@ export class BasketController {
   basket() {}
 
   @Post('/add')
-  addToBasket() {}
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
+  addToBasket(@Body() basketDto: BasketDto) {
+    return this.basketService.addToBasket(basketDto);
+  }
 
   @Post('/add-discount')
   addDiscountToBasket() {}
 
-  @Post('/remove')
-  removeFromBasket() {}
+  @Delete('/remove')
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
+  removeFromBasket(@Body() basketDto: BasketDto) {
+    return this.basketService.removeFromBasket(basketDto);
+  }
 
-  @Post('/remove-discount')
+  @Delete('/remove/:id')
+  removeFromBasketById(@Param('id', ParseIntPipe) id: number) {
+    return this.basketService.removeFromBasketById(id);
+  }
+
+  @Delete('/remove-discount')
   removeDiscountFromBasket() {}
 }
