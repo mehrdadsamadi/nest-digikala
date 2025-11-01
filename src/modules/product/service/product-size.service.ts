@@ -8,7 +8,7 @@ import { DataSource, Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
 import { ProductSizeEntity } from '../entities/product-size.entity';
 import { AddSizeDto, UpdateSizeDto } from '../dto/size.dto';
-import { toBoolean } from '../../../common/utils/functions.utils';
+import { notNan, toBoolean } from '../../../common/utils/functions.utils';
 import { ProductType } from '../enum/type.enum';
 
 @Injectable()
@@ -51,7 +51,7 @@ export class ProductSizeService {
         productId,
       });
 
-      if (!isNaN(parseInt(count.toString())) && +count > 0) {
+      if (notNan(count) && +count > 0) {
         product.count =
           parseInt(product.count.toString()) + parseInt(count.toString());
         await queryRunner.manager.save(ProductEntity, product);
@@ -104,7 +104,7 @@ export class ProductSizeService {
       if (price) size.price = price;
       if (discount) size.discount = discount;
 
-      if (count && !isNaN(parseInt(count.toString())) && +count > 0) {
+      if (count && notNan(count) && +count > 0) {
         product.count =
           parseInt(product.count.toString()) - parseInt(size.count.toString());
         product.count =

@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
-import { toBoolean } from '../../../common/utils/functions.utils';
+import { notNan, toBoolean } from '../../../common/utils/functions.utils';
 import { ProductType } from '../enum/type.enum';
 import { ProductColorEntity } from '../entities/product-color.entity';
 import { AddColorDto, UpdateColorDto } from '../dto/color.dto';
@@ -59,7 +59,7 @@ export class ProductColorService {
         productId,
       });
 
-      if (!isNaN(parseInt(count.toString())) && +count > 0) {
+      if (notNan(count) && +count > 0) {
         product.count =
           parseInt(product.count.toString()) + parseInt(count.toString());
         await queryRunner.manager.save(ProductEntity, product);
@@ -114,7 +114,7 @@ export class ProductColorService {
       if (price) color.price = price;
       if (discount) color.discount = discount;
 
-      if (count && !isNaN(parseInt(count.toString())) && +count > 0) {
+      if (count && notNan(count) && +count > 0) {
         product.count =
           parseInt(product.count.toString()) - parseInt(color.count.toString());
         product.count =

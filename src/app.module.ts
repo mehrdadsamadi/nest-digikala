@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductModule } from './modules/product/product.module';
+import { DiscountModule } from './modules/discount/discount.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProductModule } from './modules/product/product.module';
       ],
     }),
     ProductModule,
+    DiscountModule,
   ],
   controllers: [],
   providers: [],
