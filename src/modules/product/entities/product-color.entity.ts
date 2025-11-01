@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../../common/abstracts/base.entity';
 import { ProductEntity } from './product.entity';
+import { BasketEntity } from '../../basket/entity/basket.entity';
 
 @Entity()
 export class ProductColorEntity extends BaseEntity {
@@ -29,4 +30,7 @@ export class ProductColorEntity extends BaseEntity {
     onDelete: 'CASCADE',
   })
   product: ProductEntity;
+
+  @OneToMany(() => BasketEntity, (basket) => basket.product)
+  baskets: BasketEntity[];
 }

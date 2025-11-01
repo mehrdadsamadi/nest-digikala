@@ -4,6 +4,7 @@ import { ProductDetailEntity } from './product-detail.entity';
 import { ProductColorEntity } from './product-color.entity';
 import { ProductSizeEntity } from './product-size.entity';
 import { ProductType } from '../enum/type.enum';
+import { BasketEntity } from '../../basket/entity/basket.entity';
 
 @Entity()
 export class ProductEntity extends BaseEntity {
@@ -42,4 +43,7 @@ export class ProductEntity extends BaseEntity {
 
   @OneToMany(() => ProductSizeEntity, (size) => size.product)
   sizes: ProductSizeEntity[];
+
+  @OneToMany(() => BasketEntity, (basket) => basket.product)
+  baskets: BasketEntity[];
 }
