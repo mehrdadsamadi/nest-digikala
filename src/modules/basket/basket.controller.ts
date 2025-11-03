@@ -10,6 +10,7 @@ import {
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { BasketService } from './basket.service';
 import { BasketDto } from './dto/basket.dto';
+import { AddDiscountToBasketDto } from './dto/basket-discount.dto';
 
 @Controller('basket')
 @ApiTags('Basket')
@@ -26,7 +27,10 @@ export class BasketController {
   }
 
   @Post('/add-discount')
-  addDiscountToBasket() {}
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
+  addDiscountToBasket(@Body() discountDto: AddDiscountToBasketDto) {
+    return this.basketService.addDiscountToBasket(discountDto);
+  }
 
   @Delete('/remove')
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
@@ -40,5 +44,8 @@ export class BasketController {
   }
 
   @Delete('/remove-discount')
-  removeDiscountFromBasket() {}
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
+  removeDiscountFromBasket(@Body() discountDto: AddDiscountToBasketDto) {
+    return this.basketService.removeDiscountFromBasket(discountDto);
+  }
 }

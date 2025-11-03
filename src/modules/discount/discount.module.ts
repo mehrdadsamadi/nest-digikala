@@ -9,5 +9,6 @@ import { DiscountService } from './discount.service';
   imports: [ProductModule, TypeOrmModule.forFeature([DiscountEntity])],
   controllers: [DiscountController],
   providers: [DiscountService],
+  exports: [DiscountService, TypeOrmModule],
 })
 export class DiscountModule {}
