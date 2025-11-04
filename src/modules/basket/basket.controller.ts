@@ -18,7 +18,9 @@ export class BasketController {
   constructor(private basketService: BasketService) {}
 
   @Get()
-  basket() {}
+  basket() {
+    return this.basketService.getBasket();
+  }
 
   @Post('/add')
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
