@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../../common/abstracts/base.entity';
 import { ProductEntity } from './product.entity';
 import { BasketEntity } from '../../basket/entity/basket.entity';
+import { OrderItemsEntity } from '../../order/entity/order-items.entity';
 
 @Entity()
 export class ProductColorEntity extends BaseEntity {
@@ -33,4 +34,7 @@ export class ProductColorEntity extends BaseEntity {
 
   @OneToMany(() => BasketEntity, (basket) => basket.product)
   baskets: BasketEntity[];
+
+  @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.color)
+  orders: OrderItemsEntity[];
 }
