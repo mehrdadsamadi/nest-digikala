@@ -8,13 +8,20 @@ import { BasketService } from '../basket/basket.service';
 import { ProductModule } from '../product/product.module';
 import { DiscountModule } from '../discount/discount.module';
 import { HttpApiModule } from '../http/http.module';
+import { OrderEntity } from '../order/entity/order.entity';
+import { OrderItemsEntity } from '../order/entity/order-items.entity';
 
 @Module({
   imports: [
     ProductModule,
     DiscountModule,
     HttpApiModule,
-    TypeOrmModule.forFeature([PaymentEntity, BasketEntity]),
+    TypeOrmModule.forFeature([
+      PaymentEntity,
+      BasketEntity,
+      OrderEntity,
+      OrderItemsEntity,
+    ]),
   ],
   controllers: [PaymentController],
   providers: [PaymentService, BasketService],

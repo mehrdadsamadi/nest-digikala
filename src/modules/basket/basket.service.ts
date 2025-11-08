@@ -144,6 +144,7 @@ export class BasketService {
           active_discount: size.active_discount,
           discount: +size.discount,
           size: size.size,
+          sizeId: size.id,
         };
       } else if (product.type === ProductType.COLORING) {
         if (!color) continue;
@@ -158,6 +159,7 @@ export class BasketService {
           discount: +color.discount,
           color_name: color.color_name,
           color_code: color.color_code,
+          colorId: color.id,
         };
       } else {
         // اگر نوع محصول ناشناخته بود می‌تونیم skip کنیم

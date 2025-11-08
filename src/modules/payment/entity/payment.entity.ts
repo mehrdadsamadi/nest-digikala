@@ -10,7 +10,7 @@ export class PaymentEntity extends BaseEntity {
   @Column({ default: false })
   status: boolean;
 
-  @Column()
+  @Column({ unique: true })
   invoice_number: string;
 
   @Column()

@@ -6,6 +6,7 @@ import { ProductModule } from './modules/product/product.module';
 import { DiscountModule } from './modules/discount/discount.module';
 import { BasketModule } from './modules/basket/basket.module';
 import { PaymentModule } from './modules/payment/payment.module';
+import { OrderModule } from './modules/order/order.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { PaymentModule } from './modules/payment/payment.module';
     DiscountModule,
     BasketModule,
     PaymentModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],

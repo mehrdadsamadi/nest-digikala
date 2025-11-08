@@ -9,8 +9,10 @@ export interface ReturnProduct {
   price: number;
   count: number;
   size?: string;
+  sizeId?: number;
   color_name?: string;
   color_code?: string;
+  colorId?: number;
 }
 
 export interface ReturnDiscount {
